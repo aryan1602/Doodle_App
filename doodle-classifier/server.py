@@ -71,7 +71,7 @@ def ready():
             something_else += val[0][i]
         something_else = 1 - something_else
         preds.append(something_else)
-        classes.append("Something else")
+        classes.append("something else")
         print(classes)
         
         return render_template("index1.html", preds=preds, classes=json.dumps(classes), chart=True, putback=request.form["payload"], net=net)

@@ -40,7 +40,7 @@
   
 
     var chart = new CanvasJS.Chart("chartContainer", {
-      theme: "light2",
+      theme: "dark2",
       animationEnabled: true,
       title: {
         text: "Detected Animal"
@@ -78,13 +78,8 @@
   }
 </script>
 
-<body>
+<body style="padding: 10px;">
 
-  <div class="container">
-    <div class="jumbotron">
-      <h1>Doodles</h1>
-      <p>Draw your favourite animals and watch a Neural Network classify your hand-drawn doodles. </p>
-    </div>
     <form method='POST' onsubmit="return prepare()">
       <input type="hidden" id="payload" name="payload" value="x">
       <div class="form-group">
