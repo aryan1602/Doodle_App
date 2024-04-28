@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import numpy as np
 import re
 import base64
@@ -8,7 +8,8 @@ from PIL import Image
 from keras.models import load_model
 from prepare_data import normalize
 import json
-
+import csv
+import os
 app = Flask(__name__)
 
 mlp = load_model("./models/animal_mlp.keras")
@@ -76,5 +77,18 @@ def ready():
         
         return render_template("index1.html", preds=preds, classes=json.dumps(classes), chart=True, putback=request.form["payload"], net=net)
 
+@app.route("/save-img", methods=["POST"])
+def saveImg():
+    image = Image.open("temp.png")
+    image = image.convert("L")
+    image = image.resize((28, 28))
+    pixel_values = list(image.getdata())
+    label = request.form['doodle']
+    with open("data/doodle_data.csv", "a", newline="") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow([label] + pixel_values)
+        
+    
+    return redirect('/')
 
 app.run()

@@ -60,6 +60,7 @@
 		{
 
 			document.getElementById("chartContainer").style.display = "none";
+			document.getElementById("feedback-form").style.display = "none";
 			context.clearRect( 0, 0, 280, 280 );
 			context.fillStyle="white";
 			context.fillRect(0,0,canvas.width,canvas.height);
