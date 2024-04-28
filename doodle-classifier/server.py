@@ -59,14 +59,22 @@ def ready():
         # normalize the values between -1 and 1
         x = normalize(x)
         val = model.predict(np.array([x]))
-        idx = np.argmax(val)
-        pred = ANIMALS[idx]
+        print(val)
+        top_3 = sorted(range(len(val[0])), key=lambda i:val[0][i], reverse=True)[:3]
+        print(top_3)
+        classes = []
+        preds = []
+        something_else = 0.0
+        for i in top_3:
+            classes.append(ANIMALS[i])
+            preds.append(val[0][i])
+            something_else += val[0][i]
+        something_else = 1 - something_else
+        preds.append(something_else)
+        classes.append("Something else")
+        print(classes)
         
-       
-        classes = ["cat", "elephant", "giraffe", "horse", "kangaroo"]
-        print(pred)
-        print(list(val[0]))
-        return render_template("index1.html", preds=list(val[0]), classes=json.dumps(classes), chart=True, putback=request.form["payload"], net=net)
+        return render_template("index1.html", preds=preds, classes=json.dumps(classes), chart=True, putback=request.form["payload"], net=net)
 
 
 app.run()

@@ -36,6 +36,9 @@
     document.getElementById("sel1").value = "{{net}}"
     var preds = {{preds}}
     var classes = {{classes | safe}}
+    nclasses = 3
+  
+
     var chart = new CanvasJS.Chart("chartContainer", {
       theme: "light2",
       animationEnabled: true,
@@ -49,26 +52,25 @@
       data: [{
         type: "column",
 
-        dataPoints: [{
-            y: preds[3] * 100,
-            label: classes[3]
-          },
+        dataPoints: [
+
+
           {
-            y: preds[2] * 100,
-            label: classes[2]
+            y: preds[0] * 100,
+            label: classes[0]
           },
           {
             y: preds[1] * 100,
             label: classes[1]
           },
           {
-            y: preds[0] * 100,
-            label: classes[0]
+            y: preds[2] * 100,
+            label: classes[2]
           },
-          {
-            y: preds[4] * 100,
-            label: classes[4]
+          {y: preds[3] * 100,
+            label: classes[3]
           }
+
         ]
       }]
     });
